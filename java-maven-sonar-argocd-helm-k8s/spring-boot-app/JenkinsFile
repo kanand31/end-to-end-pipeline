@@ -12,7 +12,8 @@ pipeline {
         dockerImage = ''
 
     }
-  stages {
+
+    stages {
         stage("fetching source code") {
             steps {
                 git url: 'https://github.com/kanand31/end-to-end-pipeline.git', branch: 'main'
@@ -44,4 +45,5 @@ pipeline {
       }
     }
     
+}
 }
