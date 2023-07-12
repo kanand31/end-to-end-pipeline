@@ -9,6 +9,7 @@ pipeline {
     environment {
         imageName = "firstproject"
         registry = "387732497979.dkr.ecr.ap-south-1.amazonaws.com/end-to-end-pipeline"
+        registryCredentials = "ecr:ap-south-1:ecr-login"
         dockerImage = ''
 
     }
@@ -37,7 +38,7 @@ pipeline {
         stage('Uploading to ECR') {
             steps{  
                script {
-                   docker.withRegistry( 'https://'+registry, 'ecr-login' )   {
+                   docker.withRegistry( 'https://'+registry, registryCredentials )   {
                    dockerImage.push("${env.BUILD_NUMBER}")
           }
         }
