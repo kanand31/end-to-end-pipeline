@@ -4,7 +4,6 @@ pipeline {
         maven 'maven'
     }
     options {
-<<<<<<< HEAD
         timeout(time: 30, unit: 'MINUTES') 
     }
     environment {
@@ -13,12 +12,7 @@ pipeline {
         dockerImage = ''
 
     }
-
-=======
-        timeout(time: 20, unit: 'MINUTES') 
-    }
->>>>>>> 9ce9cd0f53b051a7ebc38048147ba80849eefbbb
-    stages {
+  stages {
         stage("fetching source code") {
             steps {
                 git url: 'https://github.com/kanand31/end-to-end-pipeline.git', branch: 'main'
