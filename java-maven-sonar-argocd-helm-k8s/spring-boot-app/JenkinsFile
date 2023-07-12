@@ -3,6 +3,16 @@ pipeline {
     tools {
         maven 'maven'
     }
+    options {
+        timeout(time: 30, unit: 'MINUTES') 
+    }
+    environment {
+        imageName = "firstproject"
+        registry = "387732497979.dkr.ecr.ap-south-1.amazonaws.com/end-to-end-pipeline"
+        dockerImage = ''
+
+    }
+
     stages {
         stage("fetching source code") {
             steps {
@@ -14,5 +24,25 @@ pipeline {
                 sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
             }
         }
+        stage('Building image') {
+
+            steps{
+
+                script {
+
+                     dockerImage = docker.build imageName
+        }
+
+      }
+    }
+        stage('Uploading to ECR') {
+            steps{  
+               script {
+                   docker.withRegistry( 'https://'+registry, 'ecr-login' )   {
+                   dockerImage.push("${env.BUILD_NUMBER}")
+          }
+        }
+      }
+    }
     }
 }
