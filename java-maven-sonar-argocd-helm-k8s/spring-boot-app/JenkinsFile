@@ -38,8 +38,8 @@ pipeline {
         stage('Uploading to ECR') {
             steps{  
                script {
-                   docker.withRegistry( 'https://'+registry, registryCredentials )   {
-                   dockerImage.push("${env.BUILD_NUMBER}")
+                  sh  "docker tag end-to-end-pipeline:${env.BUILD_NUMBER}  387732497979.dkr.ecr.ap-south-1.amazonaws.com/end-to-end-pipeline:${env.BUILD_NUMBER}"
+                  sh  "docker push 387732497979.dkr.ecr.ap-south-1.amazonaws.com/end-to-end-pipeline:${env.BUILD_NUMBER}"
           }
         }
       }
