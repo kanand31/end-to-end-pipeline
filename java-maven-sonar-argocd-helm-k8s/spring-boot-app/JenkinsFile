@@ -7,7 +7,7 @@ pipeline {
         timeout(time: 30, unit: 'MINUTES') 
     }
     environment {
-        imageName = "firstproject"
+        imageName = "end-to-end-pipeline"
         registry = "387732497979.dkr.ecr.ap-south-1.amazonaws.com/end-to-end-pipeline"
         registryCredentials = "ecr:ap-south-1:ecr-login"
         dockerImage = ''
